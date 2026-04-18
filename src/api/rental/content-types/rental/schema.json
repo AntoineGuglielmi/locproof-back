@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rentals",
+  "info": {
+    "singularName": "rental",
+    "pluralName": "rentals",
+    "displayName": "Rental"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "address": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "landlordEmail": {
+      "type": "email"
+    },
+    "validationToken": {
+      "type": "string"
+    },
+    "tokenExpiresAt": {
+      "type": "datetime"
+    },
+    "validatedAt": {
+      "type": "datetime"
+    },
+    "tenant": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::tenant.tenant",
+      "inversedBy": "rentals"
+    }
+  }
+}

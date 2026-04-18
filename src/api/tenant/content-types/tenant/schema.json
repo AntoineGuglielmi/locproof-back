@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tenants",
+  "info": {
+    "singularName": "tenant",
+    "pluralName": "tenants",
+    "displayName": "Tenant"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email",
+      "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "firstname"
+    },
+    "emailVerified": {
+      "type": "boolean",
+      "default": false
+    },
+    "emailVerificationToken": {
+      "type": "string"
+    },
+    "rentals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rental.rental",
+      "mappedBy": "tenant"
+    }
+  }
+}

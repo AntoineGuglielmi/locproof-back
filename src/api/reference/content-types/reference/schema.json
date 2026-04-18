@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "references",
+  "info": {
+    "singularName": "reference",
+    "pluralName": "references",
+    "displayName": "Reference"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "rental": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::rental.rental"
+    },
+    "paidOnTime": {
+      "type": "boolean"
+    },
+    "wellMaintained": {
+      "type": "boolean"
+    },
+    "communication": {
+      "type": "boolean"
+    },
+    "recommended": {
+      "type": "boolean"
+    },
+    "comment": {
+      "type": "text"
+    }
+  }
+}
