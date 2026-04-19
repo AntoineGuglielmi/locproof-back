@@ -479,6 +479,7 @@ export interface ApiRentalRental extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     endDate: Schema.Attribute.Date;
+    isValidated: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     landlordEmail: Schema.Attribute.Email;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -487,6 +488,10 @@ export interface ApiRentalRental extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    reference: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::reference.reference'
+    >;
     startDate: Schema.Attribute.Date;
     tenant: Schema.Attribute.Relation<'manyToOne', 'api::tenant.tenant'>;
     tokenExpiresAt: Schema.Attribute.DateTime;
@@ -513,6 +518,7 @@ export interface ApiTenantTenant extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email & Schema.Attribute.Unique;
+    emailVerificationExpiresAt: Schema.Attribute.DateTime;
     emailVerificationToken: Schema.Attribute.String;
     emailVerified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     firstname: Schema.Attribute.String;

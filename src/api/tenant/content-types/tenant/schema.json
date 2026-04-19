@@ -32,6 +32,9 @@
     "emailVerificationToken": {
       "type": "string"
     },
+    "emailVerificationExpiresAt": {
+      "type": "datetime"
+    },
     "rentals": {
       "type": "relation",
       "relation": "oneToMany",

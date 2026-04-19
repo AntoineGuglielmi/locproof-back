@@ -37,6 +37,16 @@
       "relation": "manyToOne",
       "target": "api::tenant.tenant",
       "inversedBy": "rentals"
+    },
+    "reference": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::reference.reference",
+      "inversedBy": "rental"
+    },
+    "isValidated": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

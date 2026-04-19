@@ -14,7 +14,8 @@
     "rental": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::rental.rental"
+      "target": "api::rental.rental",
+      "mappedBy": "reference"
     },
     "paidOnTime": {
       "type": "boolean"
