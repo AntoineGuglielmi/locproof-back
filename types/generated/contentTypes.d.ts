@@ -455,7 +455,7 @@ export interface ApiReferenceReference extends Struct.CollectionTypeSchema {
     paidOnTime: Schema.Attribute.Boolean;
     publishedAt: Schema.Attribute.DateTime;
     recommended: Schema.Attribute.Boolean;
-    rental: Schema.Attribute.Relation<'oneToOne', 'api::rental.rental'>;
+    rentalDocumentId: Schema.Attribute.String & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -479,7 +479,7 @@ export interface ApiRentalRental extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     endDate: Schema.Attribute.Date;
-    isValidated: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    expiresAt: Schema.Attribute.DateTime;
     landlordEmail: Schema.Attribute.Email;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -488,18 +488,48 @@ export interface ApiRentalRental extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    reference: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::reference.reference'
-    >;
+    rentalToken: Schema.Attribute.UID;
     startDate: Schema.Attribute.Date;
-    tenant: Schema.Attribute.Relation<'manyToOne', 'api::tenant.tenant'>;
-    tokenExpiresAt: Schema.Attribute.DateTime;
+    state: Schema.Attribute.Enumeration<['pending', 'validated']> &
+      Schema.Attribute.DefaultTo<'pending'>;
+    tenantDocumentId: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     validatedAt: Schema.Attribute.DateTime;
-    validationToken: Schema.Attribute.String;
+  };
+}
+
+export interface ApiTenantVerificationTenantVerification
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'tenant_verifications';
+  info: {
+    displayName: 'TenantVerification';
+    pluralName: 'tenant-verifications';
+    singularName: 'tenant-verification';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    expiresAt: Schema.Attribute.DateTime;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tenant-verification.tenant-verification'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    state: Schema.Attribute.Enumeration<['pending', 'validated']> &
+      Schema.Attribute.DefaultTo<'pending'>;
+    tenantVerificationToken: Schema.Attribute.UID;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -518,9 +548,6 @@ export interface ApiTenantTenant extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email & Schema.Attribute.Unique;
-    emailVerificationExpiresAt: Schema.Attribute.DateTime;
-    emailVerificationToken: Schema.Attribute.String;
-    emailVerified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     firstname: Schema.Attribute.String;
     lastname: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -530,11 +557,11 @@ export interface ApiTenantTenant extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    rentals: Schema.Attribute.Relation<'oneToMany', 'api::rental.rental'>;
-    slug: Schema.Attribute.UID<'firstname'>;
+    slug: Schema.Attribute.UID<''>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    verified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
 
@@ -1051,6 +1078,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::reference.reference': ApiReferenceReference;
       'api::rental.rental': ApiRentalRental;
+      'api::tenant-verification.tenant-verification': ApiTenantVerificationTenantVerification;
       'api::tenant.tenant': ApiTenantTenant;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

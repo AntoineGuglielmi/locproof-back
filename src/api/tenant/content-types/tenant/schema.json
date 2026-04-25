@@ -23,23 +23,11 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "firstname"
+      "targetField": ""
     },
-    "emailVerified": {
+    "verified": {
       "type": "boolean",
       "default": false
-    },
-    "emailVerificationToken": {
-      "type": "string"
-    },
-    "emailVerificationExpiresAt": {
-      "type": "datetime"
-    },
-    "rentals": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::rental.rental",
-      "mappedBy": "tenant"
     }
   }
 }

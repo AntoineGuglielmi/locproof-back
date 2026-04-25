@@ -11,11 +11,9 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "rental": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::rental.rental",
-      "mappedBy": "reference"
+    "rentalDocumentId": {
+      "type": "string",
+      "unique": true
     },
     "paidOnTime": {
       "type": "boolean"

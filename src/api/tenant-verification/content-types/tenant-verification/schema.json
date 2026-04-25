@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tenant_verifications",
+  "info": {
+    "singularName": "tenant-verification",
+    "pluralName": "tenant-verifications",
+    "displayName": "TenantVerification"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email"
+    },
+    "tenantVerificationToken": {
+      "type": "uid"
+    },
+    "expiresAt": {
+      "type": "datetime"
+    },
+    "state": {
+      "type": "enumeration",
+      "default": "pending",
+      "enum": [
+        "pending",
+        "validated"
+      ]
+    }
+  }
+}
