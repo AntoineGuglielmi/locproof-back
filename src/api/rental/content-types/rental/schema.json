@@ -42,6 +42,9 @@
         "pending",
         "validated"
       ]
+    },
+    "cityPublic": {
+      "type": "string"
     }
   }
 }
