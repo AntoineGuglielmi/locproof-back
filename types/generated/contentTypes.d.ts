@@ -442,7 +442,7 @@ export interface ApiReferenceReference extends Struct.CollectionTypeSchema {
   };
   attributes: {
     comment: Schema.Attribute.Text;
-    communication: Schema.Attribute.Boolean;
+    communication: Schema.Attribute.Enumeration<['yes', 'no', 'skip']>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -452,14 +452,14 @@ export interface ApiReferenceReference extends Struct.CollectionTypeSchema {
       'api::reference.reference'
     > &
       Schema.Attribute.Private;
-    paidOnTime: Schema.Attribute.Boolean;
+    paidOnTime: Schema.Attribute.Enumeration<['yes', 'no', 'skip']>;
     publishedAt: Schema.Attribute.DateTime;
-    recommended: Schema.Attribute.Boolean;
+    recommended: Schema.Attribute.Enumeration<['yes', 'no', 'skip']>;
     rentalDocumentId: Schema.Attribute.String & Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    wellMaintained: Schema.Attribute.Boolean;
+    wellMaintained: Schema.Attribute.Enumeration<['yes', 'no', 'skip']>;
   };
 }
 
