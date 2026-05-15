@@ -15,20 +15,40 @@
       "type": "string",
       "unique": true
     },
-    "paidOnTime": {
-      "type": "boolean"
-    },
-    "wellMaintained": {
-      "type": "boolean"
-    },
-    "communication": {
-      "type": "boolean"
-    },
-    "recommended": {
-      "type": "boolean"
-    },
     "comment": {
       "type": "text"
+    },
+    "paidOnTime": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "skip"
+      ]
+    },
+    "wellMaintained": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "skip"
+      ]
+    },
+    "communication": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "skip"
+      ]
+    },
+    "recommended": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "skip"
+      ]
     }
   }
 }
