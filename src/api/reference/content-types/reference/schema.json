@@ -11,9 +11,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "rentalDocumentId": {
-      "type": "string",
-      "unique": true
+    "rental": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::rental.rental"
+    },
+    "tenant": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tenant.tenant"
     },
     "comment": {
       "type": "text"

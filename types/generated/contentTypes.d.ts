@@ -455,7 +455,8 @@ export interface ApiReferenceReference extends Struct.CollectionTypeSchema {
     paidOnTime: Schema.Attribute.Enumeration<['yes', 'no', 'skip']>;
     publishedAt: Schema.Attribute.DateTime;
     recommended: Schema.Attribute.Enumeration<['yes', 'no', 'skip']>;
-    rentalDocumentId: Schema.Attribute.String & Schema.Attribute.Unique;
+    rental: Schema.Attribute.Relation<'oneToOne', 'api::rental.rental'>;
+    tenant: Schema.Attribute.Relation<'oneToOne', 'api::tenant.tenant'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
