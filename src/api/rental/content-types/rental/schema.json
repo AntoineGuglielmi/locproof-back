@@ -29,9 +29,6 @@
     "landlordEmail": {
       "type": "email"
     },
-    "tenantDocumentId": {
-      "type": "string"
-    },
     "validatedAt": {
       "type": "datetime"
     },
@@ -45,6 +42,16 @@
     },
     "cityPublic": {
       "type": "string"
+    },
+    "tenantVerification": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tenant-verification.tenant-verification"
+    },
+    "tenant": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tenant.tenant"
     }
   }
 }
