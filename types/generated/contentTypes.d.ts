@@ -455,7 +455,7 @@ export interface ApiReferenceReference extends Struct.CollectionTypeSchema {
     paidOnTime: Schema.Attribute.Enumeration<['yes', 'no', 'skip']>;
     publishedAt: Schema.Attribute.DateTime;
     recommended: Schema.Attribute.Enumeration<['yes', 'no', 'skip']>;
-    rentalDocumentId: Schema.Attribute.String & Schema.Attribute.Unique;
+    rental: Schema.Attribute.Relation<'oneToOne', 'api::rental.rental'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -493,7 +493,11 @@ export interface ApiRentalRental extends Struct.CollectionTypeSchema {
     startDate: Schema.Attribute.Date;
     state: Schema.Attribute.Enumeration<['pending', 'validated']> &
       Schema.Attribute.DefaultTo<'pending'>;
-    tenantDocumentId: Schema.Attribute.String;
+    tenant: Schema.Attribute.Relation<'oneToOne', 'api::tenant.tenant'>;
+    tenantVerification: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::tenant-verification.tenant-verification'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
